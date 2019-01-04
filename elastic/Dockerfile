@@ -20,3 +20,13 @@ RUN mkdir /usr/share/elasticsearch/plugins/x-pack/x-pack-core/x-pack-core-6.2.4 
 	&& cd ../ \
 	&& rm -rf x-pack-core-6.2.4 \
 	&& chown elasticsearch ./x-pack-core-6.2.4.jar
+
+# 挂载目录
+ADD ./conf/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
+ADD ./data /usr/share/elasticsearch/data
+ADD ./logs /usr/share/elasticsearch/logs
+
+# 修改挂载目录、文件权限
+RUN chown elasticsearch /usr/share/elasticsearch/config/elasticsearch.yml \
+    && chown elasticsearch -R /usr/share/elasticsearch/data \
+    && chown elasticsearch -R /usr/share/elasticsearch/logs

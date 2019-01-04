@@ -18,4 +18,11 @@ discovery.zen.ping.unicast.hosts: ["192.168.1.234", "192.168.1.235"]
 # 为了避免脑裂，集群节点数最少为 半数+1
 discovery.zen.minimum_master_nodes: 1  
 
-xpack.security.enabled: false
+# 是否开启安全验证
+xpack.security.enabled: true
+# 是否开启监控
+xpack.monitoring.enabled: true
+# 是否开启图形
+xpack.graph.enabled: true
+# 是否开启watcher 仅仅es配置
+xpack.watcher.enabled: true

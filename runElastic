@@ -1,0 +1,11 @@
+#!/bin/bash
+
+dir=${PWD}
+
+#############################Elastic
+docker build --network host -t 15918793994/elasticsearch-rewrite:6.2.4 ${dir}/elastic
+docker pull 15918793994/elasticsearch-rewrite:6.2.4
+docker rm $(docker ps -a| grep "elastic" |cut -d " " -f 1) -f
+docker run --net=host --name elastic -d \
+	-e ELASTIC_PASSWORD=123456 \
+	15918793994/elasticsearch-rewrite:6.2.4
