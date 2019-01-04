@@ -14,3 +14,9 @@ bash run
 ##### 直接访问  
 直接在浏览器上访问kibana http://127.0.0.1:5601  
 惊不惊喜，意不意外，就是这么简单  
+
+##### 去官网申请license证书  
+https://license.elastic.co/registration  
+主要修改这几个地方  
+1."type":"basic" 替换为 "type":"platinum"  
+2."expiry_date_in_millis":1561420799999 替换为 "expiry_date_in_millis":3107746200000  
