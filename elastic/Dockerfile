@@ -1,5 +1,8 @@
 FROM 15918793994/elasticsearch:6.2.4
 
+# 节点容器
+ARG node
+
 # 传入重写后的x-pack验证类
 ADD ./x-pack/* /tmp/x-pack
 
@@ -23,10 +26,12 @@ RUN mkdir /usr/share/elasticsearch/plugins/x-pack/x-pack-core/x-pack-core-6.2.4 
 
 # 挂载目录
 ADD ./conf/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
-ADD ./data /usr/share/elasticsearch/data
-ADD ./logs /usr/share/elasticsearch/logs
+ADD ./data/$node /usr/share/elasticsearch/data
+ADD ./logs/$node /usr/share/elasticsearch/logs
+ADD ./certs /usr/share/elasticsearch/config/certificates/certs
 
 # 修改挂载目录、文件权限
 RUN chown elasticsearch /usr/share/elasticsearch/config/elasticsearch.yml \
     && chown elasticsearch -R /usr/share/elasticsearch/data \
-    && chown elasticsearch -R /usr/share/elasticsearch/logs
+    && chown elasticsearch -R /usr/share/elasticsearch/logs \
+    && chown elasticsearch -R /usr/share/elasticsearch/config
