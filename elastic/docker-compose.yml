@@ -22,6 +22,7 @@ services:
       - xpack.ssl.key=/usr/share/elasticsearch/config/certificates/certs/es01/es01.key
     ports:
       - 9200:9200
+      - 9300:9300
     healthcheck:
       test: curl --cacert $CERTS_DIR/ca/ca.crt -s https://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
       interval: 30s
@@ -48,6 +49,9 @@ services:
       - xpack.ssl.certificate_authorities=/usr/share/elasticsearch/config/certificates/certs/ca/ca.crt
       - xpack.ssl.certificate=/usr/share/elasticsearch/config/certificates/certs/es02/es02.crt
       - xpack.ssl.key=/usr/share/elasticsearch/config/certificates/certs/es02/es02.key
+    ports:
+     - 9200:9200
+     - 9300:9300
 
   wait_until_ready:
     build: ./

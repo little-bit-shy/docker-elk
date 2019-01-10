@@ -3,8 +3,8 @@
 dir=${PWD}
 
 #############################Kibana
-docker pull 15918793994/kibana:6.2.4
+docker build --network host -t 15918793994/kibana-rewrite:6.2.4 ${dir}/kibana
+docker pull 15918793994/kibana-rewrite:6.2.4
 docker rm $(docker ps -a| grep "kibana" |cut -d " " -f 1) -f
 docker run --net=host --name kibana -d \
-	-v ${dir}/kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml \
-	15918793994/kibana:6.2.4
+	15918793994/kibana-rewrite:6.2.4
