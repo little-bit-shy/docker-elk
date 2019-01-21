@@ -1,7 +1,7 @@
 # Default Kibana configuration from kibana-docker.
 
 server.name: kibana
-server.host: "0"
+server.host: "0.0.0.0"
 elasticsearch.url: https://192.168.1.234:9200
 elasticsearch.username: elastic
 elasticsearch.password: "123456"

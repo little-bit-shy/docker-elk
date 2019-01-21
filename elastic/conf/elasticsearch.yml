@@ -1,6 +1,4 @@
-cluster.name: elastic-cluster  
-# 节点名称，仅仅是描述名称，用于在日志中区分
-node.name: node1
+cluster.name: elastic-cluster
 #
 # 数据的默认存放路径
 path.data: /usr/share/elasticsearch/data  

@@ -2,13 +2,11 @@ instances:
   - name: es01
     dns:
       - es01
-      - localhost
     ip:
-      - 127.0.0.1
+      - 192.168.1.234
 
   - name: es02
     dns:
       - es02
-      - localhost
     ip:
-      - 127.0.0.1
+      - 192.168.1.235
