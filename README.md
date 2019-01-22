@@ -1,18 +1,39 @@
 #### elk环境docker一键安装  
-##### 安装docker  
+首选准备3台服务器以备使用es01、es02、kibana  
+##### 安装docker（es01、es02、kibana）  
 如果你已安装可跳过此步骤  
-bash docker.install.sh  
+bash docker.install  
 
-##### 启动docker  
-service start docker  
+##### 安装docker-compose（es01、es02、kibana）  
+如果你已安装可跳过此步骤  
+bash compose.install  
 
-##### elk环境启动  
-到安装目录下执行启动脚本  
-bash run  
-等待启动...........  
+##### 启动docker（es01、es02、kibana）    
+service/systemctl start docker  
+
+##### 修改（es01）    
+修改kibana/kibana.yml配置文件中elasticsearch的链接  
+
+##### 证书生成（es01）    
+进入安装目录  
+修改elastic/instances.yml（证书生成依赖）文件备用  
+执行docker-compose -f elastic/create-certs.yml up  
+等待证书生成...........  
+复制elastic/certs文件夹下的所有文件到kibana/certs中备用  
+
+##### 环境同步（es01、es02、kibana）  
+将上一步证书生成后的项目同步到es02、kibana，使其保持一致  
+
+##### 依次启动环境（es01、es02、kibana）  
+###### es01
+docker-compose -f elastic/es01.yml up  
+###### es02
+docker-compose -f elastic/es02.yml up  
+###### kibana
+docker-compose -f kibana/kibana.yml up  
 
 ##### 直接访问  
-直接在浏览器上访问kibana http://127.0.0.1:5601  
+直接在浏览器上访问kibana http://kibana:5601  
 惊不惊喜，意不意外，就是这么简单  
 
 ##### 去官网申请license证书  
