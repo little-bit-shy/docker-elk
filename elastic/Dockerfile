@@ -20,7 +20,7 @@ ENV xpack.ssl.key $CERTS_DIR/$node/$node.key
 # 传入重写后的x-pack验证类
 ADD ./x-pack/* /tmp/x-pack
 
-RUN yum install -y java-1.8.0-openjdk*
+RUN yum install -y java-1.8.0-openjdk-devel.x86_64
 
 # 破解x-pack
 RUN mkdir /usr/share/elasticsearch/plugins/x-pack/x-pack-core/x-pack-core-6.2.4 \

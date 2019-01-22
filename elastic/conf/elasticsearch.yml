@@ -6,7 +6,9 @@ path.data: /usr/share/elasticsearch/data
 path.logs: /usr/share/elasticsearch/logs
 #
 # 当前节点的IP地址
-network.host: 0.0.0.0  
+network.host: 0.0.0.0
+network.publish_host: 0.0.0.0
+#
 # 对外提供服务的端口，9300为集群服务的端口
 http.port: 9200
 #
@@ -14,7 +16,7 @@ http.port: 9200
 discovery.zen.ping.unicast.hosts: ["192.168.1.234", "192.168.1.235"]
 #
 # 为了避免脑裂，集群节点数最少为 半数+1
-discovery.zen.minimum_master_nodes: 1  
+discovery.zen.minimum_master_nodes: 2
 
 # 是否开启安全验证
 xpack.security.enabled: true

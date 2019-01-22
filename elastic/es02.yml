@@ -10,5 +10,6 @@ services:
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
-     - 9200:9200
-     - 9300:9300
+      - 9200:9200
+      - 9300:9300
+    network_mode: "host"
