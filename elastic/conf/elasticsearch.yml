@@ -16,7 +16,7 @@ http.port: 9200
 discovery.zen.ping.unicast.hosts: ["192.168.1.234", "192.168.1.235"]
 #
 # 为了避免脑裂，集群节点数最少为 半数+1
-discovery.zen.minimum_master_nodes: 2
+discovery.zen.minimum_master_nodes: 1
 
 # 是否开启安全验证
 xpack.security.enabled: true
