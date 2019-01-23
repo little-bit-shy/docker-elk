@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#############################启动Kibana
+
+# 删除运行中的容器
+docker rm $(docker ps -a| grep "kibana" |cut -d " " -f 1) -f
+
+# 修改项目权限
+chown 1000:1000 -R ${PWD}/kibana
+# 构建容器
+docker build \
+    --network host \
+    -t 15918793994/kibana:6.2.4 ${PWD}/kibana
+# 运行容器
+docker run -d --name kibana --net=host  \
+	-v ${PWD}/kibana/certs:/usr/share/kibana/certs \
+	-v ${PWD}/kibana/conf/kibana.yml /usr/share/kibana/config/kibana.yml \
+	15918793994/kibana:6.2.4

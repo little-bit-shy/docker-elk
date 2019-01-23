@@ -1,11 +1,13 @@
-version: '2.2'
+#!/bin/bash
 
-services:
-  create_certs:
-    container_name: create_certs
-    image: 15918793994/elasticsearch:6.2.4
-    command: >
-      bash -c '
+#############################生成证书
+
+# 运行容器
+docker run --name create_certs --net=host  \
+	-v ${PWD}/elastic/instances.yml:/usr/share/elasticsearch/config/certificates/instances.yml \
+	-v ${PWD}/elastic/certs:/usr/share/elasticsearch/config/certificates/certs \
+	15918793994/elasticsearch:6.2.4 bash -c '
+	    cd /usr/share/elasticsearch
         if [[ ! -d config/certificates/certs ]]; then
           mkdir config/certificates/certs -p;
         fi;
@@ -15,7 +17,3 @@ services:
         fi;
         chgrp -R 0 config/certificates/certs
       '
-    working_dir: /usr/share/elasticsearch
-    volumes:
-     - ./instances.yml:/usr/share/elasticsearch/config/certificates/instances.yml
-     - ./certs:/usr/share/elasticsearch/config/certificates/certs
