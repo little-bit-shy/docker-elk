@@ -17,6 +17,6 @@ docker build \
 docker run -d --name elastic --net=host  \
 	-v ${PWD}/elastic/data:/usr/share/elasticsearch/data \
 	-v ${PWD}/elastic/logs:/usr/share/elasticsearch/logs \
-	-v ${PWD}/elastic/certs /usr/share/elasticsearch/config/certificates/certs \
-	-v ${PWD}/elastic/conf/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml \
+	-v ${PWD}/elastic/certs:/usr/share/elasticsearch/config/certificates/certs \
+	-v ${PWD}/elastic/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
 	15918793994/elasticsearch:6.2.4
