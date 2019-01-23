@@ -24,7 +24,7 @@ service/systemctl start docker
 ##### 证书生成（es01）    
 进入安装目录  
 修改elastic/instances.yml（证书生成依赖）文件备用  
-执行docker-compose -f elastic/create-certs.yml up  
+执行bash certs  
 等待证书生成...........  
 复制elastic/certs文件夹下的所有文件到kibana/certs中备用  
 
