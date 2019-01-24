@@ -8,8 +8,6 @@ elasticsearch.password: "123456"
 xpack.monitoring.ui.container.elasticsearch.enabled: true
 
 elasticsearch.ssl.certificateAuthorities: /usr/share/kibana/certs/ca/ca.crt
-elasticsearch.ssl.certificate: /usr/share/kibana/certs/es01/es01.crt
-elasticsearch.ssl.key: /usr/share/kibana/certs/es01/es01.key
 
 # 是否开启报表仅仅kibana配置
 xpack.reporting.enabled: true

@@ -1,6 +1,9 @@
 #!/bin/bash
 
 #############################启动Kibana
+# 拉取证书
+rm -rf ${PWD}/kibana/certs
+ln -s ${PWD}/elastic/certs ${PWD}/kibana/certs
 
 # 删除运行中的容器
 docker rm $(docker ps -a| grep "kibana" |cut -d " " -f 1) -f
