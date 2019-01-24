@@ -1,7 +1,9 @@
 FROM 15918793994/elasticsearch:6.2.4
 
-# 节点容器
+# 变量定义
 ARG node
+ARG hosts
+ARG minimum_master_nodes
 
 # 环境变量
 ENV node.name $node
@@ -16,6 +18,8 @@ ENV xpack.security.transport.ssl.verification_mode certificate
 ENV xpack.ssl.certificate_authorities $CERTS_DIR/ca/ca.crt
 ENV xpack.ssl.certificate $CERTS_DIR/$node/$node.crt
 ENV xpack.ssl.key $CERTS_DIR/$node/$node.key
+ENV discovery.zen.ping.unicast.hosts $hosts
+ENV discovery.zen.minimum_master_nodes $minimum_master_nodes
 
 # 传入重写后的x-pack验证类
 ADD ./x-pack/* /tmp/x-pack
