@@ -11,7 +11,7 @@ hostnamectl set-hostname es02
 如果你已安装可跳过此步骤  
 bash docker.install  
 
-##### 安装docker-compose（es01、es02）  
+##### 安装docker-compose、shyaml（es01、es02）  
 如果你已安装可跳过此步骤  
 bash compose.install  
 
