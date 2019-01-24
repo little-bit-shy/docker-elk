@@ -20,7 +20,7 @@ do
   echo "${ip}   ${dns}" >> ${PWD}/elastic/etc/hosts
   hosts="${hosts},${dns}"
 done
-hosts=${host:1}
+hosts=${hosts:1}
 minimum_master_nodes=$[${length}/2 + 1]
 # 构建容器
 docker build \
