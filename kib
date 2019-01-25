@@ -17,5 +17,6 @@ docker build \
 # 运行容器
 docker run -d --name kibana --net=host  \
 	-v ${PWD}/kibana/certs:/usr/share/kibana/certs \
+	-v ${PWD}/kibana/data:/usr/share/kibana/data \
 	-v ${PWD}/kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml \
 	15918793994/kibana:6.2.4
