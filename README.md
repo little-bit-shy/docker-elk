@@ -23,7 +23,7 @@ service/systemctl start docker
 ### 证书处理  
 ##### 证书生成（es01）  
 进入安装目录  
-修改elastic/instances.yml（证书生成依赖）文件备用  
+修改elastic/instances.yml（证书/hosts文件 生成依赖）文件备用  
 执行bash certs  
 等待证书生成...........  
 生成的证书文件在elastic/certs文件夹中    
