@@ -3,7 +3,7 @@
 #############################生成证书
 
 # 运行容器
-docker run --name create_certs --net=host  \
+docker run --net=host  \
 	-v ${PWD}/elastic/instances.yml:/usr/share/elasticsearch/config/certificates/instances.yml \
 	-v ${PWD}/elastic/certs:/usr/share/elasticsearch/config/certificates/certs \
 	15918793994/elasticsearch:6.2.4 bash -c '

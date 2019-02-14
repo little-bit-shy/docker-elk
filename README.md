@@ -47,7 +47,7 @@ bash kib
 直接在浏览器上访问kibana http://es01:5601  
 惊不惊喜，意不意外，就是这么简单  
 
-### Xpack已经破解过了，直接在Kibana上传修改后的证书即可得到铂金会员  
+### Dockerfile中已经对Xpack进行了破解处理，有兴趣的可以去看看，直接在Kibana上传修改后的证书即可得到铂金会员  
 ##### 去官网申请license证书  
 https://license.elastic.co/registration  
 主要修改这几个地方  
