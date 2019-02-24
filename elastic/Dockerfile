@@ -4,10 +4,11 @@ FROM 15918793994/elasticsearch:6.2.4
 ARG node
 ARG hosts
 ARG minimum_master_nodes
+ARG elastic_password
 
 # 环境变量
 ENV node.name $node
-ENV ELASTIC_PASSWORD 123456
+ENV ELASTIC_PASSWORD $elastic_password
 ENV CERTS_DIR /usr/share/elasticsearch/config/certificates/certs
 ENV ES_JAVA_OPTS "-Xms512m -Xmx512m"
 ENV xpack.license.self_generated.type trial

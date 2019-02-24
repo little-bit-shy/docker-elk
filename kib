@@ -10,8 +10,15 @@ docker rm $(docker ps -a| grep "kibana" |cut -d " " -f 1) -f
 
 # 修改项目权限
 chown 1000:1000 -R ${PWD}/kibana
+# 拉取公用配置
+elasticsearch_url=(`cat ${PWD}/elastic/public.yml | shyaml get-value public.elasticsearch.url`)
+elasticsearch_username=(`cat ${PWD}/elastic/public.yml | shyaml get-value public.elasticsearch.username`)
+elasticsearch_password=(`cat ${PWD}/elastic/public.yml | shyaml get-value public.elasticsearch.password`)
 # 构建容器
 docker build \
+    --build-arg elasticsearch_url=${elasticsearch_url} \
+    --build-arg elasticsearch_username=${elasticsearch_username} \
+    --build-arg elasticsearch_password=${elasticsearch_password} \
     --network host \
     -t 15918793994/kibana:6.2.4 ${PWD}/kibana
 # 运行容器

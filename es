@@ -22,11 +22,14 @@ do
 done
 hosts=${hosts:1}
 minimum_master_nodes=$[${length}/2 + 1]
-# 构建容器
+# 拉取公用配置
+elasticsearch_password=(`cat ${PWD}/elastic/public.yml | shyaml get-value public.elasticsearch.password`)
+# 构建容
 docker build \
     --build-arg node=${host} \
     --build-arg hosts=${hosts} \
     --build-arg minimum_master_nodes=${minimum_master_nodes} \
+    --build-arg elastic_password=${elasticsearch_password} \
     --network host \
     -t 15918793994/elasticsearch:6.2.4 ${PWD}/elastic
 # 运行容器

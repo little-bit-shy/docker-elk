@@ -2,12 +2,8 @@
 首选准备2台服务器以备使用es01、es02 、es03
 
 ##### 修改主机名称（es01、es02、es03）  
-###### es01
-hostnamectl set-hostname es01  
-###### es02
-hostnamectl set-hostname es02  
-###### es03
-hostnamectl set-hostname es03  
+###### es*
+hostnamectl set-hostname es*   
 
 ##### 安装docker（es01、es02、es03）  
 如果你已安装可跳过此步骤  
@@ -19,6 +15,9 @@ bash compose.install
 
 ##### 启动docker（es01、es02、es03）    
 service/systemctl start docker  
+
+### 修改配置文件  
+修改elastic/public.yml  
 
 ### 证书处理  
 ##### 证书生成（es01）  
@@ -41,9 +40,7 @@ bash es
 惊不惊喜，意不意外，就是这么简单  
 
 ### Kibana运行  
-##### 修改、运行（任意一台）  
-修改kibana/kibana.yml配置文件中elasticsearch的链接即可  
-bash kib  
+##### 运行（任意一台）  
 直接在浏览器上访问kibana http://es01:5601  
 惊不惊喜，意不意外，就是这么简单  
 
