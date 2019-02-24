@@ -2,8 +2,12 @@
 首选准备2台服务器以备使用es01、es02 、es03
 
 ##### 修改主机名称（es01、es02、es03）  
-###### es*
-hostnamectl set-hostname es*   
+###### es01
+hostnamectl set-hostname es01   
+###### es02
+hostnamectl set-hostname es02   
+###### es03
+hostnamectl set-hostname es03   
 
 ##### 安装docker（es01、es02、es03）  
 如果你已安装可跳过此步骤  
