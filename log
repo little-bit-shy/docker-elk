@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#############################启动logstash
+# 拉取证书
+rm -rf ${PWD}/logstash/certs
+ln -s ${PWD}/elastic/certs ${PWD}/logstash/certs
+
+# 删除运行中的容器
+docker rm $(docker ps -a| grep "logstash" |cut -d " " -f 1) -f
+
+# 修改项目权限
+chown 1000:1000 -R ${PWD}/logstash
+# 构建容器
+docker build \
+    --network host \
+    -t 15918793994/logstash:6.2.4 ${PWD}/logstash
+# 运行容器
+docker run --rm -it --name logstash --net=host  \
+    -v ${PWD}/logstash/certs:/usr/share/logstash/certs \
+	-v ${PWD}/logstash/data:/usr/share/logstash/data \
+	-v ${PWD}/logstash/pipeline:/usr/share/logstash/pipeline \
+	-v ${PWD}/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml \
+	15918793994/logstash:6.2.4
