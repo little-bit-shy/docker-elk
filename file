@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#############################启动filebeat
+# 拉取证书
+rm -rf ${PWD}/filebeat/certs
+ln -s ${PWD}/elastic/certs ${PWD}/filebeat/certs
+
+# 删除运行中的容器
+docker rm $(docker ps -a| grep "filebeat" |cut -d " " -f 1) -f
+
+# 修改项目权限
+chown 1000:1000 -R ${PWD}/filebeat
+# 构建容器
+docker build \
+    --network host \
+    -t 15918793994/filebeat:6.2.4 ${PWD}/filebeat
+# 运行容器
+docker run --rm -it --name filebeat --net=host  \
+    -v ${PWD}/filebeat/certs:/usr/share/filebeat/certs \
+    -v ${PWD}/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml \
+    -v ${PWD}/filebeat/logs:/usr/share/filebeat/logs \
+    -v ${PWD}/filebeat/prospectors.d:/usr/share/filebeat/prospectors.d \
+    -v ${PWD}/filebeat/modules.d:/usr/share/filebeat/modules.d \
+    -v ${PWD}/filebeat/data:/usr/share/filebeat/data \
+	15918793994/filebeat:6.2.4

@@ -54,3 +54,10 @@ https://license.elastic.co/registration
 主要修改这几个地方  
 1."type":"basic" 替换为 "type":"platinum"  
 2."expiry_date_in_millis":1561420799999 替换为 "expiry_date_in_millis":3107746200000  
+
+### 运行Filebeat+Logstash
+##### 运行（任意一台）  
+bash log  
+bash file  
+启动成功后，默认会处理filebeat/logs/nginx文件夹下的两份日志文件，之后可以通过kibana进行各种数据分析操作  
+惊不惊喜，意不意外，就是这么简单  

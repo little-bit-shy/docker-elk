@@ -1,5 +1,2 @@
-http.host: "0.0.0.0"
-xpack.monitoring.elasticsearch.url: "https://10.1.1.112:9200"
-xpack.monitoring.elasticsearch.username: "logstash_system"
-xpack.monitoring.elasticsearch.password: "asdfgh"
+http.host: "127.0.0.1"
 xpack.monitoring.elasticsearch.ssl.ca: /usr/share/logstash/certs/ca/ca.crt

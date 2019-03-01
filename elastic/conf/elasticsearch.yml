@@ -19,3 +19,5 @@ xpack.monitoring.enabled: true
 xpack.graph.enabled: true
 # 是否开启watcher 仅仅es配置
 xpack.watcher.enabled: true
+# 开启自动创建索引功能（白名单）
+action.auto_create_index: .*,logstash_*,filebeat-*

@@ -1,0 +1,21 @@
+filebeat.config:
+  prospectors:
+    path: ${path.config}/prospectors.d/*.yml
+    reload.enabled: false
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+processors:
+- add_cloud_metadata:
+
+output.logstash:
+  hosts: ['127.0.0.1:5044']
+
+#output.elasticsearch:
+#  hosts: ["https://10.1.1.111:9200"]
+#  ssl.certificate_authorities: ["/usr/share/filebeat/certs/ca/ca.crt"]
+#  username: "elastic"
+#  password: "asdfgh"
+#setup.kibana:
+#  host: "10.1.1.113:5601"

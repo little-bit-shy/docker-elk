@@ -10,8 +10,15 @@ docker rm $(docker ps -a| grep "logstash" |cut -d " " -f 1) -f
 
 # 修改项目权限
 chown 1000:1000 -R ${PWD}/logstash
+# 拉取公用配置
+elasticsearch_url=(`cat ${PWD}/elastic/public.yml | shyaml get-value public.elasticsearch.url`)
+elasticsearch_username=(`cat ${PWD}/elastic/public.yml | shyaml get-value public.elasticsearch.username`)
+elasticsearch_password=(`cat ${PWD}/elastic/public.yml | shyaml get-value public.elasticsearch.password`)
 # 构建容器
 docker build \
+    --build-arg elasticsearch_url=${elasticsearch_url} \
+    --build-arg elasticsearch_username=${elasticsearch_username} \
+    --build-arg elasticsearch_password=${elasticsearch_password} \
     --network host \
     -t 15918793994/logstash:6.2.4 ${PWD}/logstash
 # 运行容器
@@ -20,4 +27,6 @@ docker run --rm -it --name logstash --net=host  \
 	-v ${PWD}/logstash/data:/usr/share/logstash/data \
 	-v ${PWD}/logstash/pipeline:/usr/share/logstash/pipeline \
 	-v ${PWD}/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml \
+	-v ${PWD}/logstash/config/GeoLite2-City.mmdb:/usr/share/logstash/config/GeoLite2-City.mmdb \
+	-v ${PWD}/logstash/config/nginx_access.json:/usr/share/logstash/config/nginx_access.json \
 	15918793994/logstash:6.2.4

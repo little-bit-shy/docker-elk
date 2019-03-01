@@ -1,0 +1,18 @@
+- module: nginx
+  # Access logs
+  access:
+    enabled: true
+    prospector.tags: ["nginx_access_log"]
+
+    # Set custom paths for the log files. If left empty,
+    # Filebeat will choose the paths depending on your OS.
+    var.paths: ["/usr/share/filebeat/logs/nginx/access*.log"]
+
+  # Error logs
+  error:
+    enabled: true
+    prospector.tags: ["nginx_error_log"]
+
+    # Set custom paths for the log files. If left empty,
+    # Filebeat will choose the paths depending on your OS.
+    var.paths: ["/usr/share/filebeat/logs/nginx/error*.log"]
