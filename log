@@ -29,4 +29,5 @@ docker run --rm -it --name logstash --net=host  \
 	-v ${PWD}/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml \
 	-v ${PWD}/logstash/config/GeoLite2-City.mmdb:/usr/share/logstash/config/GeoLite2-City.mmdb \
 	-v ${PWD}/logstash/config/nginx_access.json:/usr/share/logstash/config/nginx_access.json \
+	-v ${PWD}/logstash/config/mysql-connector-java-5.1.47.jar:/usr/share/logstash/config/mysql-connector-java-5.1.47.jar \
 	15918793994/logstash:6.2.4

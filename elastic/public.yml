@@ -1,7 +1,7 @@
 public:
   elasticsearch:
-    # 用于kibana查找elastic
-    url: https://10.1.1.111:9200
+    # elastic
+    url: "https://10.1.1.111:9200"
     # x-pack 生成的超级管理员账号
     username: "elastic"
     # elastic 的密码，作用于http协议
