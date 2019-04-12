@@ -1,25 +1,42 @@
 #!/bin/bash
 
+dir=/usr/local/elk
+
 #############################启动filebeat
 # 拉取证书
-rm -rf ${PWD}/filebeat/certs
-ln -s ${PWD}/elastic/certs ${PWD}/filebeat/certs
+rm -rf ${dir}/filebeat/certs
+ln -s ${dir}/elastic/certs ${dir}/filebeat/certs
 
 # 删除运行中的容器
 docker rm $(docker ps -a| grep "filebeat" |cut -d " " -f 1) -f
 
 # 修改项目权限
-chown 1000:1000 -R ${PWD}/filebeat
+chown 1000:1000 -R ${dir}/filebeat
+
+# 创建容器hosts
+: > ${dir}/elastic/etc/hosts
+
+length=`cat ${dir}/elastic/instances.yml | shyaml get-length instances`
+for((i=0;i<${length};i++));
+do
+  ipString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.ip`)
+  dnsString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.dns`)
+  ip=${ipString[1]}
+  dns=${dnsString[1]}
+  echo "${ip}   ${dns}" >> ${dir}/elastic/etc/hosts
+done
+
 # 构建容器
 docker build \
     --network host \
-    -t 15918793994/filebeat:6.2.4 ${PWD}/filebeat
+    -t 15918793994/filebeat:6.2.4 ${dir}/filebeat
 # 运行容器
 docker run --rm -it --name filebeat --net=host  \
-    -v ${PWD}/filebeat/certs:/usr/share/filebeat/certs \
-    -v ${PWD}/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml \
-    -v ${PWD}/filebeat/logs:/usr/share/filebeat/logs \
-    -v ${PWD}/filebeat/prospectors.d:/usr/share/filebeat/prospectors.d \
-    -v ${PWD}/filebeat/modules.d:/usr/share/filebeat/modules.d \
-    -v ${PWD}/filebeat/data:/usr/share/filebeat/data \
+    -v ${dir}/filebeat/certs:/usr/share/filebeat/certs \
+    -v ${dir}/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml \
+    -v ${dir}/filebeat/logs:/usr/share/filebeat/logs \
+    -v ${dir}/filebeat/prospectors.d:/usr/share/filebeat/prospectors.d \
+    -v ${dir}/filebeat/modules.d:/usr/share/filebeat/modules.d \
+    -v ${dir}/filebeat/data:/usr/share/filebeat/data \
+    -v ${dir}/elastic/etc/hosts:/etc/hosts \
 	15918793994/filebeat:6.2.4

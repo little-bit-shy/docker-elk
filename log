@@ -1,33 +1,50 @@
 #!/bin/bash
 
+dir=/usr/local/elk
+
 #############################启动logstash
 # 拉取证书
-rm -rf ${PWD}/logstash/certs
-ln -s ${PWD}/elastic/certs ${PWD}/logstash/certs
+rm -rf ${dir}/logstash/certs
+ln -s ${dir}/elastic/certs ${dir}/logstash/certs
 
 # 删除运行中的容器
 docker rm $(docker ps -a| grep "logstash" |cut -d " " -f 1) -f
 
 # 修改项目权限
-chown 1000:1000 -R ${PWD}/logstash
+chown 1000:1000 -R ${dir}/logstash
+
+# 创建容器hosts
+: > ${dir}/elastic/etc/hosts
+
+length=`cat ${dir}/elastic/instances.yml | shyaml get-length instances`
+for((i=0;i<${length};i++));
+do
+  ipString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.ip`)
+  dnsString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.dns`)
+  ip=${ipString[1]}
+  dns=${dnsString[1]}
+  echo "${ip}   ${dns}" >> ${dir}/elastic/etc/hosts
+done
+
 # 拉取公用配置
-elasticsearch_url=(`cat ${PWD}/elastic/public.yml | shyaml get-value public.elasticsearch.url`)
-elasticsearch_username=(`cat ${PWD}/elastic/public.yml | shyaml get-value public.elasticsearch.username`)
-elasticsearch_password=(`cat ${PWD}/elastic/public.yml | shyaml get-value public.elasticsearch.password`)
+elasticsearch_url=(`cat ${dir}/elastic/public.yml | shyaml get-value public.elasticsearch.url`)
+elasticsearch_username=(`cat ${dir}/elastic/public.yml | shyaml get-value public.elasticsearch.username`)
+elasticsearch_password=(`cat ${dir}/elastic/public.yml | shyaml get-value public.elasticsearch.password`)
 # 构建容器
 docker build \
     --build-arg elasticsearch_url=${elasticsearch_url} \
     --build-arg elasticsearch_username=${elasticsearch_username} \
     --build-arg elasticsearch_password=${elasticsearch_password} \
     --network host \
-    -t 15918793994/logstash:6.2.4 ${PWD}/logstash
+    -t 15918793994/logstash:6.2.4 ${dir}/logstash
 # 运行容器
 docker run --rm -it --name logstash --net=host  \
-    -v ${PWD}/logstash/certs:/usr/share/logstash/certs \
-	-v ${PWD}/logstash/data:/usr/share/logstash/data \
-	-v ${PWD}/logstash/pipeline:/usr/share/logstash/pipeline \
-	-v ${PWD}/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml \
-	-v ${PWD}/logstash/config/GeoLite2-City.mmdb:/usr/share/logstash/config/GeoLite2-City.mmdb \
-	-v ${PWD}/logstash/config/nginx_access.json:/usr/share/logstash/config/nginx_access.json \
-	-v ${PWD}/logstash/config/mysql-connector-java-5.1.47.jar:/usr/share/logstash/config/mysql-connector-java-5.1.47.jar \
+    -v ${dir}/logstash/certs:/usr/share/logstash/certs \
+	-v ${dir}/logstash/data:/usr/share/logstash/data \
+	-v ${dir}/logstash/pipeline:/usr/share/logstash/pipeline \
+	-v ${dir}/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml \
+	-v ${dir}/logstash/config/GeoLite2-City.mmdb:/usr/share/logstash/config/GeoLite2-City.mmdb \
+	-v ${dir}/logstash/config/nginx_access.json:/usr/share/logstash/config/nginx_access.json \
+	-v ${dir}/logstash/config/mysql-connector-java-5.1.47.jar:/usr/share/logstash/config/mysql-connector-java-5.1.47.jar \
+	-v ${dir}/elastic/etc/hosts:/etc/hosts \
 	15918793994/logstash:6.2.4
