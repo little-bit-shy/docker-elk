@@ -42,3 +42,7 @@ RUN mkdir /usr/share/elasticsearch/plugins/x-pack/x-pack-core/x-pack-core-6.2.4 
 	&& cd ../ \
 	&& rm -rf x-pack-core-6.2.4 \
 	&& chown elasticsearch ./x-pack-core-6.2.4.jar
+
+# 安装elasticsearch-sql插件
+ADD ./elasticsearch-sql.sh /tmp/elasticsearch-sql.sh
+RUN bash /tmp/elasticsearch-sql.sh
