@@ -38,7 +38,7 @@ docker build \
     --network host \
     -t 15918793994/logstash:6.2.4 ${dir}/logstash
 # 运行容器
-docker run --rm -it --name logstash --net=host  \
+docker run -d --name logstash --net=host  \
     -v ${dir}/logstash/certs:/usr/share/logstash/certs \
 	-v ${dir}/logstash/data:/usr/share/logstash/data \
 	-v ${dir}/logstash/pipeline:/usr/share/logstash/pipeline \
