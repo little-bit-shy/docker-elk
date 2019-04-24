@@ -27,8 +27,10 @@ hosts=""
 length=`cat ${dir}/elastic/instances.yml | shyaml get-length instances`
 for((i=0;i<${length};i++));
 do
+  hostnameString=(`cat ${dir}/hadoop/instances.yml | shyaml get-value instances.${i}.hostname`)
   ipString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.ip`)
   dnsString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.dns`)
+  hostname=${hostnameString[1]}
   ip=${ipString[1]}
   dns=${dnsString[1]}
   echo "${ip}   ${dns}" >> ${dir}/elastic/etc/hosts
@@ -36,6 +38,9 @@ do
   for thisIp in ${thisIps[@]}
       do
         if [ "${thisIp}" == "${ip}" ] ;then
+            if [ "${hostname}" == "true" ] ;then
+              thisHostname=${dns}
+            fi
             echo "${ip}   es" >> ${dir}/elastic/etc/hosts
             host=${dns}
         fi
@@ -55,7 +60,7 @@ docker build \
     -t 15918793994/elasticsearch:6.2.4 ${dir}/elastic
 sysctl -w vm.max_map_count=262144
 # 运行容器
-docker run -d --name elastic --net=host  \
+docker run -d --name elastic --net=host --hostname ${thisHostname} \
 	-v ${dir}/elastic/data:/usr/share/elasticsearch/data \
 	-v ${dir}/elastic/logs:/usr/share/elasticsearch/logs \
 	-v ${dir}/elastic/certs:/usr/share/elasticsearch/config/certificates/certs \
