@@ -27,7 +27,7 @@ hosts=""
 length=`cat ${dir}/elastic/instances.yml | shyaml get-length instances`
 for((i=0;i<${length};i++));
 do
-  hostnameString=(`cat ${dir}/hadoop/instances.yml | shyaml get-value instances.${i}.hostname`)
+  hostnameString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.hostname`)
   ipString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.ip`)
   dnsString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.dns`)
   hostname=${hostnameString[1]}
