@@ -60,7 +60,7 @@ docker build \
     -t 15918793994/elasticsearch:6.2.4 ${dir}/elastic
 sysctl -w vm.max_map_count=262144
 # 运行容器
-docker run -d --name elastic --net=host --hostname=${thisHostname} \
+docker run -d --name elastic --net=host --hostname ${thisHostname} \
 	-v ${dir}/elastic/data:/usr/share/elasticsearch/data \
 	-v ${dir}/elastic/logs:/usr/share/elasticsearch/logs \
 	-v ${dir}/elastic/certs:/usr/share/elasticsearch/config/certificates/certs \
