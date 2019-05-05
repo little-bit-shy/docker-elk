@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir=/usr/local/elk
+dir=$(cd `dirname $0`; pwd)
 
 #############################启动logstash
 # 拉取证书

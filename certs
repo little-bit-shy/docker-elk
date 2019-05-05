@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir=/usr/local/elk
+dir=$(cd `dirname $0`; pwd)
 
 #############################生成证书
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir=/usr/local/elk
+dir=$(cd `dirname $0`; pwd)
 
 #############################启动Elastic
 # 删除运行中的容器
