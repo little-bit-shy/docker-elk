@@ -1,24 +1,18 @@
 instances:
   - name: es01
-    hostname:
-      - true
     dns:
       - es01
     ip:
-      - 192.168.253.130
+      - 192.168.1.100
 
   - name: es02
-    hostname:
-      - true
     dns:
       - es02
     ip:
-      - 192.168.253.131
+      - 192.168.1.101
 
   - name: es03
-    hostname:
-      - true
     dns:
       - es03
     ip:
-      - 192.168.253.132
+      - 192.168.1.102

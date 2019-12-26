@@ -27,10 +27,8 @@ hosts=""
 length=`cat ${dir}/elastic/instances.yml | shyaml get-length instances`
 for((i=0;i<${length};i++));
 do
-  hostnameString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.hostname`)
   ipString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.ip`)
   dnsString=(`cat ${dir}/elastic/instances.yml | shyaml get-value instances.${i}.dns`)
-  hostname=${hostnameString[1]}
   ip=${ipString[1]}
   dns=${dnsString[1]}
   echo "${ip}   ${dns}" >> ${dir}/elastic/etc/hosts
@@ -38,9 +36,7 @@ do
   for thisIp in ${thisIps[@]}
       do
         if [ "${thisIp}" == "${ip}" ] ;then
-            if [ "${hostname}" == "true" ] ;then
-              thisHostname=${dns}
-            fi
+            thisHostname=${dns}
             echo "${ip}   es" >> ${dir}/elastic/etc/hosts
             host=${dns}
         fi
