@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# docker-compose、shyaml安装
+# docker-compose、shyaml 安装
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py
 rm -rf ./get-pip.py

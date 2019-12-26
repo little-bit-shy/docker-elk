@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# docker安装
+# docker 安装
 wget -qO- https://get.docker.com/ | sh

@@ -3,7 +3,6 @@
 dir=$(cd `dirname $0`; pwd)
 
 #############################生成证书
-
 # 运行容器
 docker run --net=host  \
 	-v ${dir}/elastic/instances.yml:/usr/share/elasticsearch/config/certificates/instances.yml \

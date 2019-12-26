@@ -30,6 +30,7 @@ done
 docker build \
     --network host \
     -t 15918793994/filebeat:6.2.4 ${dir}/filebeat
+
 # 运行容器
 docker run -d --name filebeat --net=host  \
     -v ${dir}/filebeat/certs:/usr/share/filebeat/certs \

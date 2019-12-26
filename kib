@@ -37,6 +37,7 @@ docker build \
     --build-arg elasticsearch_password=${elasticsearch_password} \
     --network host \
     -t 15918793994/kibana:6.2.4 ${dir}/kibana
+
 # 运行容器
 docker run -d --name kibana --net=host  \
 	-v ${dir}/kibana/certs:/usr/share/kibana/certs \

@@ -32,8 +32,9 @@ service/systemctl start docker
 bash es  
 
 ##### 直接访问  
-直接在浏览器上访问kibana https://es01:9200、https://es02:9200、https://es03:9200  
-惊不惊喜，意不意外，就是这么简单  
+直接在浏览器上访问elastic https://es01:9200
+查看集群健康度：https://es01:9200/_cluster/health?pretty
+惊不惊喜，意不意外，就是这么简单
 
 ### Kibana运行  
 ##### 运行（任意一台）  
