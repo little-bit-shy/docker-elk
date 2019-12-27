@@ -36,6 +36,7 @@ docker run -d --name filebeat --net=host  \
     -v ${dir}/filebeat/certs:/usr/share/filebeat/certs \
     -v ${dir}/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml \
     -v ${dir}/filebeat/logs:/usr/share/filebeat/logs \
+    -v ${dir}/filebeat/logs/nginx:/usr/share/filebeat/logs/nginx \
     -v ${dir}/filebeat/prospectors.d:/usr/share/filebeat/prospectors.d \
     -v ${dir}/filebeat/modules.d:/usr/share/filebeat/modules.d \
     -v ${dir}/filebeat/data:/usr/share/filebeat/data \
