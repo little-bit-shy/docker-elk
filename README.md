@@ -54,4 +54,4 @@ https://license.elastic.co/registration
 bash log  
 bash file  
 启动成功后，默认会处理filebeat/logs/nginx文件夹下的两份日志文件，之后可以通过kibana进行各种数据分析操作  
-惊不惊喜，意不意外，就是这么简单...  
+惊不惊喜，意不意外，就是这么简单
